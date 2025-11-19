@@ -88,11 +88,31 @@
             <p class="text-gray-500">點擊下方專案進入預覽模式，並透過滑動查看設計解說。</p>
         </header>
 
-        <!-- 主要互動區塊：左側解說 + 右側裝置 -->
+        <!-- 主要互動區塊：左側解說 + 右側裝置 (使用 order- 調整手機版順序) -->
         <div class="grid grid-cols-1 md:grid-cols-5 gap-8">
             
-            <!-- 左側：動態解說與專案資訊 (md:col-span-2) -->
-            <div class="md:col-span-2 space-y-6">
+            <!-- 右側：裝置預覽與操控 (md:col-span-3) - 在手機版優先顯示 (order-1) -->
+            <div class="md:col-span-3 flex flex-col items-center order-1 md:order-none">
+                
+                <!-- 互動式手機裝置模型 -->
+                <div id="active-mockup-container" class="phone-mockup w-fit mb-8 relative hidden md:block">
+                    <div class="phone-notch"></div>
+                    <div id="phone-screen" class="phone-screen">
+                        <!-- UI 截圖將動態載入這裡 -->
+                    </div>
+
+                    <!-- 左右滑動控制按鈕 -->
+                    <button onclick="prevSlide()" class="absolute left-[-4rem] top-1/2 transform -translate-y-1/2 p-3 bg-white rounded-full shadow-lg text-gray-800 hover:bg-gray-100 transition">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
+                    </button>
+                    <button onclick="nextSlide()" class="absolute right-[-4rem] top-1/2 transform -translate-y-1/2 p-3 bg-white rounded-full shadow-lg text-gray-800 hover:bg-gray-100 transition">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                    </button>
+                </div>
+            </div>
+
+            <!-- 左側：動態解說與專案資訊 (md:col-span-2) - 在手機版後方顯示 (order-2) -->
+            <div class="md:col-span-2 space-y-6 order-2 md:order-none">
                 <h2 id="project-name" class="text-2xl font-bold text-indigo-700"></h2>
                 
                 <div class="bg-white p-6 rounded-xl shadow-lg border border-gray-100">
@@ -116,26 +136,6 @@
                     <!-- 查看詳情按鈕 -->
                     <button onclick="showCaseStudy()" id="detail-button" class="mt-6 w-full px-6 py-3 bg-indigo-600 text-white font-semibold rounded-xl hover:bg-indigo-700 transition duration-200 shadow-md">
                         查看完整專案詳情 (View Full Case Study)
-                    </button>
-                </div>
-            </div>
-
-            <!-- 右側：裝置預覽與操控 (md:col-span-3) -->
-            <div class="md:col-span-3 flex flex-col items-center">
-                
-                <!-- 互動式手機裝置模型 -->
-                <div id="active-mockup-container" class="phone-mockup w-fit mb-8 relative hidden md:block">
-                    <div class="phone-notch"></div>
-                    <div id="phone-screen" class="phone-screen">
-                        <!-- UI 截圖將動態載入這裡 -->
-                    </div>
-
-                    <!-- 左右滑動控制按鈕 -->
-                    <button onclick="prevSlide()" class="absolute left-[-4rem] top-1/2 transform -translate-y-1/2 p-3 bg-white rounded-full shadow-lg text-gray-800 hover:bg-gray-100 transition">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
-                    </button>
-                    <button onclick="nextSlide()" class="absolute right-[-4rem] top-1/2 transform -translate-y-1/2 p-3 bg-white rounded-full shadow-lg text-gray-800 hover:bg-gray-100 transition">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
                     </button>
                 </div>
 
@@ -275,7 +275,7 @@
             
             // 由於 mobile 裝置上空間有限，預設隱藏大型 mockup 直到選擇專案
             if (window.innerWidth < 768) {
-                 document.getElementById('active-mockup-container').classList.remove('hidden');
+                document.getElementById('active-mockup-container').classList.remove('hidden');
             }
         }
 
