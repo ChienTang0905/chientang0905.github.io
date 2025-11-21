@@ -10,8 +10,12 @@
         body { font-family: 'Nunito', 'Noto Sans TC', sans-serif; background-color: #f4f7f9; }
 
         .phone-mockup { border: 10px solid #2d3748; border-radius: 3rem; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.4); position: relative; background-color: black; padding: 0; transition: all 0.5s cubic-bezier(0.25,0.8,0.25,1); }
-        .phone-screen { height: 600px; width: 300px; overflow: hidden; border-radius: 2rem; position: relative; }
-        .phone-notch { position: absolute; top: 0.5rem; left: 50%; transform: translateX(-50%); width: 100px; height: 20px; background: #2d3748; border-radius: 0 0 10px 10px; z-index: 10; }
+        .phone-screen {    width: 300px;
+    height: calc(300px * 852 / 393); /* 自動依比例計算高度 */
+    overflow: hidden;
+    border-radius: 2rem;
+    position: relative; }
+       
         .phone-ui-image { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease-in-out; }
 
         .case-study-modal { max-height: 90vh; overflow-y: auto; }
@@ -106,7 +110,7 @@
         const projects = [
             { id:'project-a', name:'NoNa: Natrium Checker', slides: [
     {
-        image: placeholderImg,
+         image: 'https://chientang0905.github.io/scanner.png',
         zh_title:'鈉含量檢測幫手',
         en_title:'NoNa: Natrium Checker',
         zh_desc:'從家人的健康焦慮出發，NoNa 讓你用最簡單的方式理解每一口的鈉含量。為了在意的人做的設計，讓日常的選擇變得更安心。',
